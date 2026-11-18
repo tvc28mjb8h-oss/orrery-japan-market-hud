@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#020711">
+<title>ORRERY JAPAN MARKET HUD</title>
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root{--bg:#020711;--panel:#071426;--panel2:#0a1b31;--line:#12365b;--blue:#36baff;--cyan:#8ce8ff;--muted:#7898b8;--white:#eaf7ff;--green:#4ce0a0;--red:#ff647c;--amber:#ffbf69}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--white);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body{min-height:100vh;background:radial-gradient(ellipse at 50% 38%,#09203a 0%,#030b17 40%,#020711 75%);overflow-x:hidden}
+button,input{font:inherit}.app{max-width:1500px;margin:auto;padding:14px 18px 24px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding:8px 2px 13px}
+.brand{font-size:clamp(18px,2vw,27px);letter-spacing:.18em;color:var(--cyan);font-weight:800;text-shadow:0 0 16px #159eff}
+.brand small{display:block;font-size:9px;letter-spacing:.34em;color:var(--muted);font-weight:500;margin-top:3px}
+.status{font-size:10px;letter-spacing:.15em;color:var(--green);border:1px solid #1b7459;padding:6px 9px;border-radius:20px}
+.clock{text-align:right;color:var(--muted);font-size:11px;line-height:1.7}
+.grid-top{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.panel{background:linear-gradient(145deg,rgba(10,29,51,.94),rgba(4,13,26,.96));border:1px solid var(--line);border-radius:12px;padding:12px;box-shadow:inset 0 0 22px rgba(21,130,220,.035),0 0 18px rgba(0,105,190,.05)}
+.metric-label{font-size:10px;letter-spacing:.16em;color:var(--muted)}.metric{font-size:clamp(20px,2.4vw,31px);font-weight:700;letter-spacing:.02em;margin:5px 0}.sub{font-size:11px;color:var(--muted)}
+.positive{color:var(--green)}.negative{color:var(--red)}.neutral{color:var(--amber)}
+.main{display:grid;grid-template-columns:minmax(230px,1fr) minmax(300px,1.15fr) minmax(230px,1fr);gap:12px;align-items:stretch}
+.section-title{font-size:11px;letter-spacing:.18em;color:var(--cyan);margin:0 0 12px}
+.reactor-panel{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;position:relative;overflow:hidden}
+.reactor{width:min(100%,300px);filter:drop-shadow(0 0 18px rgba(28,168,255,.5));animation:pulse 5s ease-in-out infinite}
+@keyframes pulse{0%,100%{filter:drop-shadow(0 0 12px rgba(28,168,255,.35))}50%{filter:drop-shadow(0 0 27px rgba(28,198,255,.72))}}
+.core-caption{text-align:center;color:var(--cyan);letter-spacing:.35em;font-size:11px;margin-top:3px}.core-sub{font-size:9px;color:var(--muted);letter-spacing:.16em;margin-top:6px}
+.signal{border:1px solid #164c78;border-radius:9px;padding:10px;margin:8px 0;background:#061326}.signal strong{display:block;color:var(--cyan);font-size:13px;margin-bottom:4px}.signal p{margin:0;color:var(--muted);font-size:11px;line-height:1.5}
+.watch-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.small-btn,.tab{border:1px solid #1b527f;background:#07182c;color:var(--cyan);border-radius:7px;padding:7px 9px;font-size:10px}
+.watchlist{margin-top:10px}.stock{display:grid;grid-template-columns:1fr auto;gap:8px;padding:10px 2px;border-bottom:1px solid rgba(34,87,130,.45);align-items:center}.stock:last-child{border:0}
+.stock-name{font-size:12px;font-weight:700}.stock-code{font-size:10px;color:var(--muted);margin-top:3px}.stock-price{text-align:right;font-size:13px;font-weight:650}.stock-change{text-align:right;font-size:10px;margin-top:3px}
+.lower{display:grid;grid-template-columns:1.15fr .85fr;gap:12px;margin-top:12px}
+.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:11px;white-space:nowrap}th{text-align:left;color:var(--muted);font-weight:500;padding:8px;border-bottom:1px solid var(--line)}td{padding:9px 8px;border-bottom:1px solid rgba(30,76,116,.4)}td:last-child,th:last-child{text-align:right}
+.empty{color:var(--muted);padding:18px 8px;text-align:center;font-size:11px}
+.toolbar{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.tabs{display:flex;gap:7px;flex-wrap:wrap}.tab.active{background:#0b3153;box-shadow:0 0 14px rgba(37,164,255,.22)}
+.view{display:none}.view.active{display:block}
+input[type=file]{display:none}.field{background:#020b17;border:1px solid #17446b;color:var(--white);padding:8px;border-radius:7px;width:100%;font-size:12px}
+.formrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:9px 0}
+.note{font-size:10px;color:var(--muted);line-height:1.6}.footer{color:#587896;font-size:9px;text-align:center;margin:18px 0 4px;letter-spacing:.08em}
+@media(max-width:850px){.main{grid-template-columns:1fr 1fr}.reactor-panel{grid-column:1/-1;grid-row:1;min-height:240px}.grid-top{grid-template-columns:repeat(2,1fr)}.lower{grid-template-columns:1fr}}
+@media(max-width:560px){.app{padding:10px}.main{grid-template-columns:1fr}.reactor-panel{grid-column:auto}.clock{font-size:9px}.grid-top{gap:7px}.panel{padding:10px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand">ORRERY <small>JAPAN MARKET HUD / ARC SYSTEM</small></div>
+  <div class="status" id="marketStatus">● DEMO DATA</div>
+  <div class="clock"><div id="clock">----</div><div>iPad / JAPAN</div></div>
+</header>
+
+<div class="grid-top">
+  <div class="panel"><div class="metric-label">NIKKEI 225</div><div class="metric">—</div><div class="sub">指数データ未接続</div></div>
+  <div class="panel"><div class="metric-label">TOPIX</div><div class="metric">—</div><div class="sub">指数データ未接続</div></div>
+  <div class="panel"><div class="metric-label">USD / JPY</div><div class="metric">—</div><div class="sub">為替データ未接続</div></div>
+  <div class="panel"><div class="metric-label">SOX INDEX</div><div class="metric">—</div><div class="sub">米国市場データ未接続</div></div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-view="overview">OVERVIEW</button>
+  <button class="tab" data-view="watch">WATCH LIST</button>
+  <button class="tab" data-view="alerts">ALERTS</button>
+  <button class="tab" data-view="settings">SETTINGS / CSV</button>
+</div>
+
+<section class="view active" id="overview">
+<div class="main">
+  <div class="panel">
+    <h2 class="section-title">SHORT TERM / 1570</h2>
+    <div class="metric-label">NIKKEI LEVERAGE ETF</div>
+    <div class="metric">1570</div>
+    <div class="sub">株価データ接続待ち</div>
+    <div class="signal"><strong>判定：未判定</strong><p>実データ未接続のため、売買シグナルはまだ算出していません。</p></div>
+    <div class="signal"><strong>分析項目</strong><p>VWAP / 5・25・75本移動平均 / RSI / MACD / 出来高 / 日経平均との連動</p></div>
+    <div class="signal"><strong>売買方針</strong><p>条件一致を通知する分析補助。注文はSBI証券で本人が確認・実行します。</p></div>
+  </div>
+
+  <div class="panel reactor-panel">
+    <svg class="reactor" viewBox="0 0 320 320" role="img" aria-label="青いアークリアクター">
+      <defs>
+        <radialGradient id="glow"><stop offset="0" stop-color="#d9faff"/><stop offset=".18" stop-color="#66dfff"/><stop offset=".48" stop-color="#087cc7" stop-opacity=".7"/><stop offset="1" stop-color="#04152b" stop-opacity="0"/></radialGradient>
+        <linearGradient id="arc" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b5f4ff"/><stop offset=".5" stop-color="#159cff"/><stop offset="1" stop-color="#064477"/></linearGradient>
+      </defs>
+      <circle cx="160" cy="160" r="145" fill="none" stroke="#0b3b65" stroke-width="1"/>
+      <circle cx="160" cy="160" r="130" fill="none" stroke="#1675ad" stroke-width="3" stroke-dasharray="3 8"/>
+      <circle cx="160" cy="160" r="112" fill="none" stroke="#1e8dcc" stroke-width="5" stroke-dasharray="180 40 55 30" transform="rotate(-35 160 160)"/>
+      <circle cx="160" cy="160" r="91" fill="none" stroke="#54cfff" stroke-width="1.5" stroke-dasharray="2 5"/>
+      <circle cx="160" cy="160" r="75" fill="none" stroke="url(#arc)" stroke-width="8" stroke-dasharray="90 16 35 12" transform="rotate(20 160 160)"/>
+      <circle cx="160" cy="160" r="58" fill="url(#glow)"/>
+      <circle cx="160" cy="160" r="42" fill="none" stroke="#a7efff" stroke-width="2"/>
+      <circle cx="160" cy="160" r="27" fill="#2ebdff" opacity=".55"/>
+      <path d="M160 119V201M119 160H201M131 131L189 189M189 131L131 189" stroke="#c7f7ff" stroke-width="2" opacity=".85"/>
+      <circle cx="160" cy="160" r="8" fill="#e8fdff"/>
+      <g fill="#8ce8ff"><circle cx="160" cy="15" r="3"/><circle cx="305" cy="160" r="3"/><circle cx="160" cy="305" r="3"/><circle cx="15" cy="160" r="3"/></g>
+    </svg>
+    <div class="core-caption">MARKET CORE</div>
+    <div class="core-sub">NIKKEI / TOPIX / SEMICONDUCTOR / FX</div>
+  </div>
+
+  <div class="panel">
+    <h2 class="section-title">LONG TERM / PORTFOLIO</h2>
+    <div class="metric-label">HOLDINGS OVERVIEW</div>
+    <div class="metric">285A</div>
+    <div class="sub">キオクシア / 保有株管理</div>
+    <div class="signal"><strong>取得単価・保有株数</strong><p>CSVまたは設定画面から登録してください。過去の会話での保有株数・取得単価は自動的に口座データとは扱いません。</p></div>
+    <div class="signal"><strong>長期・中期分類</strong><p>長期配当用 / 中期値上がり用 の区分をCSVで引き継げます。</p></div>
+    <div class="signal"><strong>管理指標</strong><p>評価損益 / 実現損益 / 配当利回り / PER / PBR / 決算予定</p></div>
+  </div>
+</div>
+<div class="lower">
+  <div class="panel"><h2 class="section-title">WATCH LIST / QUICK VIEW</h2><div id="quickList" class="watchlist"></div></div>
+  <div class="panel"><h2 class="section-title">SIGNAL LOG</h2><div class="empty">データ接続後にシグナル履歴を表示します。</div></div>
+</div>
+</section>
+
+<section class="view" id="watch">
+<div class="panel">
+  <div class="watch-head"><h2 class="section-title">WATCH LIST / REGISTERED ISSUES</h2><button class="small-btn" id="addStock">＋ 銘柄追加</button></div>
+  <div class="toolbar"><label class="small-btn" for="csvFile">CSVを読み込む</label><input id="csvFile" type="file" accept=".csv,text/csv"><button class="small-btn" id="exportCsv">CSVを書き出す</button></div>
+  <div class="table-wrap"><table><thead><tr><th>コード</th><th>銘柄名</th><th>分類</th><th>株数</th><th>取得単価</th><th>データ状態</th><th></th></tr></thead><tbody id="stockTable"></tbody></table></div>
+  <p class="note">価格・損益欄はマーケットデータ接続後に有効になります。CSV列：code,name,category,shares,cost</p>
+</div>
+</section>
+
+<section class="view" id="alerts">
+<div class="panel">
+  <h2 class="section-title">ALERT CONFIGURATION</h2>
+  <p class="note">この第1版では通知条件を端末内に保存します。実際の株価到達監視・バックグラウンド通知は、データ提供元とサーバーを接続した後に有効化します。</p>
+  <div class="formrow"><input class="field" id="alertCode" placeholder="銘柄コード 例：1570"><input class="field" id="alertPrice" type="number" placeholder="目標株価"></div>
+  <div class="formrow"><select class="field" id="alertType"><option value="above">目標以上で通知</option><option value="below">目標以下で通知</option></select><button class="small-btn" id="saveAlert">アラートを保存</button></div>
+  <div id="alertList" class="watchlist"></div>
+</div>
+</section>
+
+<section class="view" id="settings">
+<div class="panel">
+  <h2 class="section-title">SETTINGS / DATA IMPORT</h2>
+  <p class="note">初期登録済み：1570（日経レバレッジ）、285A（キオクシア）。40銘柄の正確な一覧はこの画面からCSVで追加してください。SBI証券のログイン情報を入力・保存する欄は設けていません。</p>
+  <div class="signal"><strong>株価データ接続</strong><p>次段階で、利用許諾のある国内株価データAPIを選定します。SBI証券の画面を外部から無断取得する方式は採用しません。</p></div>
+  <div class="signal"><strong>更新頻度</strong><p>データ提供元の配信仕様・契約条件に従って設定します。リアルタイムと遅延データを明確に区別して表示します。</p></div>
+  <button class="small-btn" id="reset">初期サンプルに戻す</button>
+</div>
+</section>
+<div class="footer">ORRERY JAPAN MARKET HUD · ARC EDITION · LOCAL PROTOTYPE · NOT CONNECTED TO LIVE MARKET DATA</div>
+</div>
+<script>
+const initial=[
+ {code:"1570",name:"NEXT FUNDS 日経平均レバレッジ",category:"短期売買",shares:"",cost:""},
+ {code:"285A",name:"キオクシアホールディングス",category:"中期値上がり",shares:"",cost:""}
+];
+let stocks=JSON.parse(localStorage.getItem("orreryStocks")||"null")||initial;
+let alerts=JSON.parse(localStorage.getItem("orreryAlerts")||"[]");
+const $=id=>document.getElementById(id);
+function save(){localStorage.setItem("orreryStocks",JSON.stringify(stocks));render()}
+function render(){
+ $("quickList").innerHTML=stocks.slice(0,8).map(s=>`<div class="stock"><div><div class="stock-name">${esc(s.name)}</div><div class="stock-code">${esc(s.code)} · ${esc(s.category||"未分類")}</div></div><div class="stock-price">—<div class="stock-change">未接続</div></div></div>`).join("")||'<div class="empty">銘柄がありません</div>';
+ $("stockTable").innerHTML=stocks.map((s,i)=>`<tr><td>${esc(s.code)}</td><td>${esc(s.name)}</td><td>${esc(s.category||"未分類")}</td><td>${esc(s.shares||"—")}</td><td>${esc(s.cost||"—")}</td><td class="neutral">未接続</td><td><button class="small-btn" onclick="removeStock(${i})">削除</button></td></tr>`).join("");
+ $("alertList").innerHTML=alerts.map((a,i)=>`<div class="stock"><div><div class="stock-name">${esc(a.code)} / ${a.type==="above"?"以上":"以下"} ${esc(a.price)}円</div><div class="stock-code">端末内に保存・監視未接続</div></div><button class="small-btn" onclick="removeAlert(${i})">削除</button></div>`).join("")||'<div class="empty">アラート未登録</div>';
+}
+function esc(x){return String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function removeStock(i){stocks.splice(i,1);save()}
+function removeAlert(i){alerts.splice(i,1);localStorage.setItem("orreryAlerts",JSON.stringify(alerts));render()}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll(".view").forEach(x=>x.classList.toggle("active",x.id===b.dataset.view))}));
+$("addStock").onclick=()=>{let code=prompt("銘柄コード");if(!code)return;let name=prompt("銘柄名")||code;let category=prompt("分類（短期売買／長期配当／中期値上がり）")||"未分類";stocks.push({code:code.trim(),name,category,shares:"",cost:""});save()};
+$("csvFile").onchange=async e=>{let f=e.target.files[0];if(!f)return;let t=await f.text();let lines=t.replace(/^\uFEFF/,"").trim().split(/\r?\n/);let start=/code/i.test(lines[0])?1:0;for(let line of lines.slice(start)){let a=line.split(",").map(x=>x.trim().replace(/^"|"$/g,""));if(a[0]){let s={code:a[0],name:a[1]||a[0],category:a[2]||"未分類",shares:a[3]||"",cost:a[4]||""};let idx=stocks.findIndex(x=>x.code===s.code);if(idx>=0)stocks[idx]=s;else stocks.push(s)}}save();e.target.value=""};
+$("exportCsv").onclick=()=>{let rows=[["code","name","category","shares","cost"],...stocks.map(s=>[s.code,s.name,s.category,s.shares,s.cost])];let csv="\uFEFF"+rows.map(r=>r.map(v=>`"${String(v??"").replace(/"/g,'""')}"`).join(",")).join("\r\n");let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="orrery_watchlist.csv";a.click();URL.revokeObjectURL(a.href)};
+$("saveAlert").onclick=()=>{let code=$("alertCode").value.trim(),price=Number($("alertPrice").value);if(!code||!price){alert("銘柄コードと目標株価を入力してください");return}alerts.push({code,price,type:$("alertType").value});localStorage.setItem("orreryAlerts",JSON.stringify(alerts));$("alertCode").value="";$("alertPrice").value="";render()};
+$("reset").onclick=()=>{if(confirm("登録銘柄とアラートを初期状態に戻しますか？")){stocks=[...initial];alerts=[];localStorage.removeItem("orreryAlerts");save()}};
+function tick(){$("clock").textContent=new Intl.DateTimeFormat("ja-JP",{dateStyle:"medium",timeStyle:"medium",hour12:false}).format(new Date())}
+tick();setInterval(tick,1000);render();
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
+</script>
+</body></html>
