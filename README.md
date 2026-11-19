@@ -28,3 +28,4 @@ For a quick local preview, open `index.html` in a browser. For Add to Home Scree
 3. Build a backend adapter and WebSocket updates.
 4. Calculate VWAP, moving averages, RSI, MACD, volume signals.
 5. Add push notification service and portfolio import workflow.
+ORRERY JAPAN MARKET HUD - deployment test
