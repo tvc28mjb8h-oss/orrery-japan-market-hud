@@ -1,10 +1,9 @@
 {
-  "name": "ORRERY JAPAN MARKET HUD",
-  "short_name": "ORRERY HUD",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "orientation": "landscape",
-  "background_color": "#020711",
-  "theme_color": "#020711",
-  "description": "Black and blue Japanese market monitoring HUD"
+  "name":"ORRERY JAPAN MARKET HUD",
+  "short_name":"ORRERY",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#020711",
+  "theme_color":"#020711",
+  "icons":[]
 }
