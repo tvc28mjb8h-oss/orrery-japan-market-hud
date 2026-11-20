@@ -1,10 +1,11 @@
-# ORRERY JAPAN MARKET HUD v2
+ORRERY JAPAN MARKET HUD v3
 
-GitHub Pagesへの更新:
-1. GitHubの `orrery-japan-market-hud` リポジトリを開く
-2. Add file → Upload files
-3. ZIP内の4ファイルをリポジトリ直下へアップロード
-4. Commit changes
-5. 数分後にPagesを再読み込み
+今回の更新：
+- LONG-TERM画面をユーザー選定の14銘柄に固定
+- 43銘柄のWATCH LISTはそのまま維持
+- 2026年11月20日時点で確認できた最新決算の要点と、A/B/Cの暫定評価・注意点を表示
+- PER/PBR/ROE/配当利回りなど、同一基準日で未確認の数値は空欄のまま（推測で補完しない）
 
-既存の `orreryStocks` を読み込み、登録済み銘柄を引き継ぐ設計です。株価APIは未接続のため、株価・騰落率・出来高・財務指標は未取得表示です。SBI証券のID・パスワードやAPIキーをHTML/GitHubに保存しないでください。リアルタイム株価・自動通知には、利用許諾のあるデータ配信元と安全なサーバー側処理が別途必要です。
+A/B/Cは業績・事業特性を中心とした一次評価で、株価水準を含む売買推奨ではありません。株価データは未接続です。
+
+GitHub Pagesへの反映：ZIPを展開し、index.html / manifest.webmanifest / sw.js / README.md をリポジトリのルートに上書きアップロードしてCommit changesしてください。
