@@ -49,14 +49,14 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;bo
 <div class="panel watch-panel"><div class="headrow"><h2 class="section-title">ALL WATCHLIST / 43 ISSUES</h2><span class="tiny" id="countLabel">43銘柄</span></div><div class="table-wrap"><table><thead><tr><th>CODE</th><th>銘柄</th><th>分類</th><th class="num">株価</th><th class="num">前日比</th><th class="num">出来高</th><th>状態</th></tr></thead><tbody id="mainRows"></tbody></table></div></div>
 </section>
 <section class="view" id="long">
-<div class="panel"><div class="long-head"><div><h2 class="section-title">LONG-TERM INVESTMENT RADAR</h2><div class="tiny">ユーザー選定の14銘柄を固定表示 / 43銘柄の監視リストとは独立</div></div><span class="status">QUALITATIVE REVIEW / 2026-11-20</span></div>
+<div class="panel"><div class="long-head"><div><h2 class="section-title">LONG-TERM INVESTMENT RADAR</h2><div class="tiny">ユーザー選定の14銘柄を固定表示 / 43銘柄の監視リストとは独立</div></div><span class="status">METRICS SNAPSHOT / 2026-11-20</span></div>
 <div class="long-grid"><div><h3 class="section-title">選抜評価の基準</h3><div class="criteria">
 <div class="criterion"><b>01 / 配当・還元</b><span>配当利回り、配当性向、連続増配・自社株買い</span></div>
 <div class="criterion"><b>02 / 収益力</b><span>ROE、営業利益率、売上・利益の成長推移</span></div>
 <div class="criterion"><b>03 / 財務健全性</b><span>自己資本比率、有利子負債、営業CF</span></div>
 <div class="criterion"><b>04 / 割安度</b><span>PER、PBR、同業他社比較、利益成長とのバランス</span></div>
-</div></div><div><h3 class="section-title">選抜ルール</h3><p class="note">A＝長期候補として優先調査、B＝保有・押し目待ち、C＝業績や事業リスクの改善確認が必要。これは業績の質を中心にした暫定評価で、現在株価に対する割安度・買い値判断ではありません。</p><p class="note">PER・PBR・ROE・配当利回りは同一基準日の確かな値を揃えられていないため空欄です。未確認値を推測で補完しません。</p></div></div></div>
-<div class="panel watch-panel"><div class="headrow"><h2 class="section-title">LONG-TERM CANDIDATES</h2><span class="tiny">選定済み 14銘柄 / 43銘柄の監視登録は維持</span></div><div class="table-wrap"><table><thead><tr><th>CODE</th><th>銘柄</th><th>最新決算・確認事項</th><th>長期評価</th><th>判断メモ</th></tr></thead><tbody id="longRows"></tbody></table></div><p class="note">※決算数値は各社の2026年11月公表資料等に基づく要約。A/B/Cは定量スコアではなく、事業の安定性・利益成長・財務/配当特性を踏まえた一次判定です。株価・PER等を反映した売買推奨ではありません。</p></div>
+</div></div><div><h3 class="section-title">選抜ルール</h3><p class="note">A＝長期候補として優先調査、B＝保有・押し目待ち、C＝業績や事業リスクの改善確認が必要。これは業績の質を中心にした暫定評価で、現在株価に対する割安度・買い値判断ではありません。</p><p class="note">株価・指標は2026/11/20の取引時間中に確認できた公表値。更新時刻や算定基準が異なるため、未確認項目は「—」表示。PER等は会社予想/実績の差に注意してください。</p></div></div></div>
+<div class="panel watch-panel"><div class="headrow"><h2 class="section-title">LONG-TERM CANDIDATES</h2><span class="tiny">選定済み 14銘柄 / 43銘柄の監視登録は維持</span></div><div class="table-wrap"><table><thead><tr><th>CODE</th><th>銘柄</th><th>株価</th><th>PER</th><th>PBR</th><th>予想配当利回り</th><th>ROE</th><th>最新決算・確認事項</th><th>長期評価</th><th>判断メモ</th></tr></thead><tbody id="longRows"></tbody></table></div><p class="note">※決算数値は各社の2026年11月公表資料等に基づく要約。A/B/Cは業績・財務・評価水準を踏まえた一次判定です。価格は取引時間中の参考値であり、売買推奨ではありません。※290Aは赤字のためPERは参考指標として不適切です。</p></div>
 </section>
 <section class="view" id="watch"><div class="panel"><div class="headrow"><h2 class="section-title">WATCH LIST / REGISTERED ISSUES</h2><button class="btn" id="addStock">＋ 銘柄追加</button></div><div class="toolbar"><label class="btn" for="csvFile">CSVを読み込む</label><input id="csvFile" type="file" accept=".csv,text/csv"><button class="btn" id="exportCsv">CSVを書き出す</button></div><div class="table-wrap"><table><thead><tr><th>コード</th><th>銘柄名</th><th>分類</th><th>株数</th><th>取得単価</th><th>データ状態</th><th></th></tr></thead><tbody id="stockRows"></tbody></table></div><p class="note">登録銘柄はこのiPadのブラウザ内に保存されます。CSV列：code,name,category,shares,cost</p></div></section>
 <section class="view" id="alerts"><div class="panel"><h2 class="section-title">ALERT CONFIGURATION</h2><p class="note">目標価格の設定は端末内に保存できます。株価到達監視・バックグラウンド通知は、データ配信元とサーバー接続後に有効化します。</p><div class="toolbar"><input class="field" id="alertCode" placeholder="銘柄コード"><input class="field" id="alertPrice" type="number" placeholder="目標株価"><select class="field" id="alertType"><option value="above">目標以上</option><option value="below">目標以下</option></select><button class="btn" id="saveAlert">保存</button></div><div id="alertRows"></div></div></section>
@@ -78,22 +78,22 @@ $("countLabel").textContent=stocks.length+"銘柄";
 $("mainRows").innerHTML=stocks.map(s=>row(s,"main")).join("");
 $("stockRows").innerHTML=stocks.map(s=>row(s,"watch")).join("");
 const longTerm=[
-{code:"285A",name:"キオクシアHD",grade:"B",latest:"中間期売上収益 4兆2,472億円。前年同期比+436.8%。",memo:"AI・データセンター向け需要が強い一方、メモリー市況の循環性と設備投資負担が大きい。値動き・業績変動に注意。"},
-{code:"2702",name:"日本マクドナルドHD",grade:"A",latest:"3Q累計 営業利益+11.0%、純利益+12.6%。通期予想を修正、年間配当予想64円。",memo:"ブランド・店舗網・キャッシュ創出力が強み。原材料費、人件費、既存店成長と株価バリュエーションを確認。"},
-{code:"3097",name:"物語コーポレーション",grade:"A",latest:"2027年6月期1Q 売上+16.8%、営業利益+33.0%、純利益+25.5%。",memo:"売上拡大と利益率改善が同時進行。出店投資・人件費負担、成長期待が株価に織り込まれ過ぎていないかが焦点。",flag:"決算"},
-{code:"4502",name:"武田薬品工業",grade:"A",latest:"中間期 売上収益+8.4%、営業利益+60.4%、純利益+171.8%。",memo:"医薬品の分散した収益基盤と配当が魅力。利益には一時要因も含み得るため、主力薬の特許切れ・開発パイプライン・負債を継続確認。"},
-{code:"2594",name:"キーコーヒー",grade:"B",latest:"中間期 売上+10.0%、営業利益+16.6%、純利益+13.0%。",memo:"ブランドと業務用販路が強み。コーヒー豆価格・為替・原材料高が利益率を圧迫しないかを確認。"},
-{code:"2058",name:"ヒガシマル",grade:"C",latest:"2026年11月13日に2027年3月期中間決算を公表。数値の詳細照合は未完了。",memo:"食品・水産飼料の事業特性を確認したい小型株。利益の安定性、流動性、配当継続性を原資料で確認するまで評価を抑制。",flag:"決算"},
-{code:"7296",name:"エフ・シー・シー",grade:"A",latest:"中間期実績を受け通期予想を上方修正。年間配当予想190円。",memo:"二輪クラッチの強みと高い株主還元が魅力。自動車・二輪需要、インド/北米依存、配当性向を確認。"},
-{code:"2109",name:"DM三井製糖",grade:"B",latest:"中間期 売上-3.8%、営業利益-1.0%、純利益-10.7%。",memo:"生活必需品に近い需要と配当が下支え。原料糖価格・為替・価格転嫁力、利益の底打ちを確認。"},
-{code:"256A",name:"飛島HD",grade:"B",latest:"中間期 売上-1.1%、営業利益+12.4%、純利益+3.2%。",memo:"建設・インフラ更新需要が追い風。受注残、採算改善、資材・人件費上昇と財務負担を確認。"},
-{code:"9432",name:"NTT",grade:"A",latest:"中間期営業収益7兆3,622億円。通期営業利益予想を1兆7,300億円へ上方修正。",memo:"通信インフラの安定性と配当が長期保有向き。成長率は高くないため、配当成長・設備投資・負債を重視。"},
-{code:"3284",name:"フージャースHD",grade:"C",latest:"中間期経常利益は3億円の黒字転換。ただし通期計画108億円に対する進捗2.8%。",memo:"上期は改善したが通期達成のハードルが高い。下期の利益計上、在庫・有利子負債、配当原資を確認。",flag:"決算"},
-{code:"8001",name:"伊藤忠商事",grade:"A",latest:"中間期収益+9.4%、営業利益+16.7%、純利益+16.0%。",memo:"非資源分野の厚み、分散事業、株主還元が強み。景気循環・投資先評価・株価水準を見ながら長期の中核候補。"},
-{code:"5367",name:"ニッカトー",grade:"A",latest:"中間期売上+25.1%、営業利益+89.3%、純利益+108.7%。",memo:"電子部品・自動車向け需要と稼働率改善で大幅増益。小型株ゆえ業績変動と出来高、増益の持続性を確認。"},
-{code:"290A",name:"Synspective",grade:"C",latest:"3Q累計売上高3,072百万円（+83.7%）、営業損失4,836百万円。受注残高120,565百万円。",memo:"成長市場・受注残は魅力だが赤字と資金調達/希薄化リスクが大きい。安定配当目的の長期枠とは分けて成長投資枠で管理。",flag:"決算"}
+{code:"285A",name:"キオクシアHD",price:"7,311円",per:"—",pbr:"3.23倍",yield:"—",roe:"—",grade:"B",latest:"中間期売上収益 4兆2,472億円。前年同期比+436.8%。",memo:"AI・データセンター向け需要が強い一方、メモリー市況の循環性と設備投資負担が大きい。値動き・業績変動に注意。"},
+{code:"2702",name:"日本マクドナルドHD",price:"9,877円",per:"36.17倍",pbr:"3.03倍",yield:"0.64%",roe:"12.09%",grade:"A",latest:"3Q累計 営業利益+11.0%、純利益+12.6%。通期予想を修正、年間配当予想64円。",memo:"ブランド・店舗網・キャッシュ創出力が強み。原材料費、人件費、既存店成長と株価バリュエーションを確認。"},
+{code:"3097",name:"物語コーポレーション",price:"6,040円",per:"26.6倍",pbr:"4.77倍",yield:"0.76%",roe:"18.55%",grade:"A",latest:"2027年6月期1Q 売上+16.8%、営業利益+33.0%、純利益+25.5%。",memo:"売上拡大と利益率改善が同時進行。出店投資・人件費負担、成長期待が株価に織り込まれ過ぎていないかが焦点。",flag:"決算"},
+{code:"4502",name:"武田薬品工業",price:"6,992円",per:"52.94倍",pbr:"1.41倍",yield:"2.94%",roe:"3%",grade:"A",latest:"中間期 売上収益+8.4%、営業利益+60.4%、純利益+171.8%。",memo:"医薬品の分散した収益基盤と配当が魅力。利益には一時要因も含み得るため、主力薬の特許切れ・開発パイプライン・負債を継続確認。"},
+{code:"2594",name:"キーコーヒー",price:"2,090円",per:"59.47倍",pbr:"1.33倍",yield:"0.67%",roe:"3.11%",grade:"B",latest:"中間期 売上+10.0%、営業利益+16.6%、純利益+13.0%。",memo:"ブランドと業務用販路が強み。コーヒー豆価格・為替・原材料高が利益率を圧迫しないかを確認。"},
+{code:"2058",name:"ヒガシマル",price:"1,000円",per:"29.8倍",pbr:"0.86倍",yield:"1.20%",roe:"—",grade:"C",latest:"2026年11月13日に2027年3月期中間決算を公表。数値の詳細照合は未完了。",memo:"食品・水産飼料の事業特性を確認したい小型株。利益の安定性、流動性、配当継続性を原資料で確認するまで評価を抑制。",flag:"決算"},
+{code:"7296",name:"エフ・シー・シー",price:"4,220円",per:"11.2倍",pbr:"0.97倍",yield:"4.50%",roe:"9.64%",grade:"A",latest:"中間期実績を受け通期予想を上方修正。年間配当予想190円。",memo:"二輪クラッチの強みと高い株主還元が魅力。自動車・二輪需要、インド/北米依存、配当性向を確認。"},
+{code:"2109",name:"DM三井製糖",price:"3,570円",per:"14.4倍",pbr:"0.97倍",yield:"3.92%",roe:"—",grade:"B",latest:"中間期 売上-3.8%、営業利益-1.0%、純利益-10.7%。",memo:"生活必需品に近い需要と配当が下支え。原料糖価格・為替・価格転嫁力、利益の底打ちを確認。"},
+{code:"256A",name:"飛島HD",price:"2,242円",per:"8.9倍",pbr:"0.79倍",yield:"4.91%",roe:"9.26%",grade:"B",latest:"中間期 売上-1.1%、営業利益+12.4%、純利益+3.2%。",memo:"建設・インフラ更新需要が追い風。受注残、採算改善、資材・人件費上昇と財務負担を確認。"},
+{code:"9432",name:"NTT",price:"168.3円",per:"13.84倍",pbr:"1.41倍",yield:"3.20%",roe:"10%",grade:"A",latest:"中間期営業収益7兆3,622億円。通期営業利益予想を1兆7,300億円へ上方修正。",memo:"通信インフラの安定性と配当が長期保有向き。成長率は高くないため、配当成長・設備投資・負債を重視。"},
+{code:"3284",name:"フージャースHD",price:"1,166円",per:"6.71倍",pbr:"0.92倍",yield:"6.35%",roe:"13.44%",grade:"C",latest:"中間期経常利益は3億円の黒字転換。ただし通期計画108億円に対する進捗2.8%。",memo:"上期は改善したが通期達成のハードルが高い。下期の利益計上、在庫・有利子負債、配当原資を確認。",flag:"決算"},
+{code:"8001",name:"伊藤忠商事",price:"2,266円",per:"16.75倍",pbr:"2.43倍",yield:"1.92%",roe:"14%",grade:"A",latest:"中間期収益+9.4%、営業利益+16.7%、純利益+16.0%。",memo:"非資源分野の厚み、分散事業、株主還元が強み。景気循環・投資先評価・株価水準を見ながら長期の中核候補。"},
+{code:"5367",name:"ニッカトー",price:"885円",per:"12.77倍",pbr:"0.81倍",yield:"2.81%",roe:"6%",grade:"A",latest:"中間期売上+25.1%、営業利益+89.3%、純利益+108.7%。",memo:"電子部品・自動車向け需要と稼働率改善で大幅増益。小型株ゆえ業績変動と出来高、増益の持続性を確認。"},
+{code:"290A",name:"Synspective",price:"883円",per:"算出不可（赤字）",pbr:"3.42倍",yield:"—",roe:"—",grade:"C",latest:"3Q累計売上高3,072百万円（+83.7%）、営業損失4,836百万円。受注残高120,565百万円。",memo:"成長市場・受注残は魅力だが赤字と資金調達/希薄化リスクが大きい。安定配当目的の長期枠とは分けて成長投資枠で管理。",flag:"決算"}
 ];
-$("longRows").innerHTML=longTerm.map(s=>`<tr><td class="code">${esc(s.code)}</td><td>${esc(s.name)}${s.flag?` <span class="state">${s.flag}</span>`:""}</td><td style="white-space:normal;min-width:230px">${esc(s.latest)}</td><td class="state">${s.grade}</td><td style="white-space:normal;min-width:260px">${esc(s.memo)}</td></tr>`).join("");
+$("longRows").innerHTML=longTerm.map(s=>`<tr><td class="code">${esc(s.code)}</td><td>${esc(s.name)}${s.flag?` <span class="state">${s.flag}</span>`:""}</td><td class="num">${esc(s.price||"—")}</td><td class="num">${esc(s.per||"—")}</td><td class="num">${esc(s.pbr||"—")}</td><td class="num">${esc(s.yield||"—")}</td><td class="num">${esc(s.roe||"—")}</td><td style="white-space:normal;min-width:230px">${esc(s.latest)}</td><td class="state">${s.grade}</td><td style="white-space:normal;min-width:260px">${esc(s.memo)}</td></tr>`).join("");
 $("alertRows").innerHTML=alerts.map((a,i)=>`<div class="tiny" style="padding:8px;border-bottom:1px solid #12365b">${esc(a.code)} / ${a.type==="above"?"以上":"以下"} ${esc(a.price)}円　<button class="btn" onclick="removeAlert(${i})">削除</button> <span class="state">監視未接続</span></div>`).join("")||'<p class="tiny">アラート未登録</p>';
 }
 function removeStock(code){if(confirm(code+"を削除しますか？")){stocks=stocks.filter(s=>s.code!==code);save()}}
