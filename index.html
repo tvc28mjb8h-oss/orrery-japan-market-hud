@@ -56,44 +56,67 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;bo
 <div class="criterion"><b>03 / 財務健全性</b><span>自己資本比率、有利子負債、営業CF</span></div>
 <div class="criterion"><b>04 / 割安度</b><span>PER、PBR、同業他社比較、利益成長とのバランス</span></div>
 </div></div><div><h3 class="section-title">選抜ルール</h3><p class="note">A＝長期候補として優先調査、B＝保有・押し目待ち、C＝業績や事業リスクの改善確認が必要。これは業績の質を中心にした暫定評価で、現在株価に対する割安度・買い値判断ではありません。</p><p class="note">株価・指標は2026/11/20の取引時間中に確認できた公表値。更新時刻や算定基準が異なるため、未確認項目は「—」表示。PER等は会社予想/実績の差に注意してください。</p></div></div></div>
-<div class="panel watch-panel"><div class="headrow"><h2 class="section-title">LONG-TERM CANDIDATES</h2><span class="tiny">選定済み 14銘柄 / 43銘柄の監視登録は維持</span></div><div class="table-wrap"><table><thead><tr><th>CODE</th><th>銘柄</th><th>株価</th><th>PER</th><th>PBR</th><th>予想配当利回り</th><th>ROE</th><th>最新決算・確認事項</th><th>長期評価</th><th>判断メモ</th></tr></thead><tbody id="longRows"></tbody></table></div><p class="note">※決算数値は各社の2026年11月公表資料等に基づく要約。A/B/Cは業績・財務・評価水準を踏まえた一次判定です。価格は取引時間中の参考値であり、売買推奨ではありません。※290Aは赤字のためPERは参考指標として不適切です。</p></div>
+<div class="panel watch-panel"><div class="headrow"><h2 class="section-title">LONG-TERM CANDIDATES</h2><span class="tiny">選定済み 14銘柄 / 43銘柄の監視登録は維持</span></div><div class="table-wrap"><table><thead><tr><th>CODE</th><th>銘柄</th><th>株価</th><th>PER</th><th>PBR</th><th>予想配当利回り</th><th>ROE</th><th>最新決算・確認事項</th><th>長期評価</th><th>判断メモ</th></tr></thead><tbody id="longRows"></tbody></table></div><p class="note">※決算数値は各社の2026年11月公表資料等に基づく要約。A/B/Cは業績・財務・評価水準を踏まえた一次判定です。株価は確認できた直近値（主に11/18〜11/20）。</p></div>
+<div class="panel watch-panel"><div class="headrow"><h2 class="section-title">VALUATION & EXECUTION RADAR</h2><span class="tiny">長期保有と売買タイミングを分離</span></div>
+<p class="note">目安は会社予想EPS×想定PERを中心にしたシナリオ値。買い候補①は分割で検討を始める水準、②はより安全余裕を見込む水準。利確目安は業績が計画通りの場合の評価上限で、到達時の全売却を意味しません。市場急変・決算修正時は再計算します。</p>
+<div class="table-wrap"><table><thead><tr><th>CODE</th><th>買い候補①</th><th>買い候補②</th><th>適正価格帯（仮）</th><th>利確検討帯</th><th>現在の判断</th></tr></thead><tbody id="valuationRows"></tbody></table></div>
+<p class="note">算定の前提：2702 EPS274.52円×PER28〜32倍、3097 EPS228.02円×22〜26倍、7296 EPS375.45円×10〜13倍、2109 EPS247.46円×12〜15倍、256A EPS250.15円×8〜10倍、9432 EPS12.23円×12〜15倍、3284 EPS176.03円×6〜8倍、8001 EPS135.93円×15〜17倍、5367 EPS75.24円×10〜14倍。2594は低ROEを考慮しEPS35.01円×35〜45倍の暫定レンジ。4502は一時要因でEPS/PERの信頼性が低く、配当利回り基準で監視。285Aはメモリー市況の循環性が強く、単年度EPSによる目標値を設定しません。2058は最新決算数値の照合待ち。290Aは成長投資枠として扱い、赤字/資金調達リスクが大きいため目標値を設定しません。</p></div>
 </section>
 <section class="view" id="watch"><div class="panel"><div class="headrow"><h2 class="section-title">WATCH LIST / REGISTERED ISSUES</h2><button class="btn" id="addStock">＋ 銘柄追加</button></div><div class="toolbar"><label class="btn" for="csvFile">CSVを読み込む</label><input id="csvFile" type="file" accept=".csv,text/csv"><button class="btn" id="exportCsv">CSVを書き出す</button></div><div class="table-wrap"><table><thead><tr><th>コード</th><th>銘柄名</th><th>分類</th><th>株数</th><th>取得単価</th><th>データ状態</th><th></th></tr></thead><tbody id="stockRows"></tbody></table></div><p class="note">登録銘柄はこのiPadのブラウザ内に保存されます。CSV列：code,name,category,shares,cost</p></div></section>
 <section class="view" id="alerts"><div class="panel"><h2 class="section-title">ALERT CONFIGURATION</h2><p class="note">目標価格の設定は端末内に保存できます。株価到達監視・バックグラウンド通知は、データ配信元とサーバー接続後に有効化します。</p><div class="toolbar"><input class="field" id="alertCode" placeholder="銘柄コード"><input class="field" id="alertPrice" type="number" placeholder="目標株価"><select class="field" id="alertType"><option value="above">目標以上</option><option value="below">目標以下</option></select><button class="btn" id="saveAlert">保存</button></div><div id="alertRows"></div></div></section>
 <div class="footer">ORRERY JAPAN MARKET HUD · ARC EDITION · STATIC PWA · MARKET DATA NOT CONNECTED</div></div>
 <script>
-const codes=["3097","4502","2702","2594","7296","285A","2058","9432","2109","256A","3284","8001","5367","290A","9984","7550","8035","9861","1570","6770","5938","4452","7564","2653","7203","6857","8316","6506","1911","8766","1605","9107","9101","VT","LLY","VYM","9983","8002","6503","4911","3197","5021","8053"];
+const codes=["3097","4502","2702","2594","7296","285A","2058","9432","2109","256A","3284","8001","5367","290A","9984","7550","8035","9861","1570","6770","5938","4452","7564","2653","7203","6857","8316","6506","1911","8766","1605","9107","9101","9983","8002","6503","4911","3197","5021","8053","LLY","VYM","VT"];
 const names={"1570":"NEXT FUNDS 日経平均レバレッジ","285A":"キオクシアHD","3097":"物語コーポレーション","4502":"武田薬品工業","2702":"日本マクドナルドHD","2594":"キーコーヒー","7296":"エフ・シー・シー","2058":"ヒガシマル","9432":"NTT","2109":"DM三井製糖","256A":"飛島HD","3284":"フージャースHD","8001":"伊藤忠商事","5367":"ニッカトー","290A":"Synspective","9984":"ソフトバンクグループ","7550":"ゼンショーHD","8035":"東京エレクトロン","9861":"吉野家HD","6770":"アルプスアルパイン","5938":"LIXIL","4452":"花王","7564":"ワークマン","2653":"イオン九州","7203":"トヨタ自動車","6857":"アドバンテスト","8316":"三井住友FG","6506":"安川電機","1911":"住友林業","8766":"東京海上HD","1605":"INPEX","9107":"川崎汽船","9101":"日本郵船","VT":"Vanguard Total World Stock ETF","LLY":"Eli Lilly","VYM":"Vanguard High Dividend Yield ETF","9983":"ファーストリテイリング","8002":"丸紅","6503":"三菱電機","4911":"資生堂","3197":"すかいらーくHD","5021":"コスモエネルギーHD","8053":"住友商事"};
 const category=c=>["1570"].includes(c)?"短期監視":c==="285A"?"中期監視":["VT","LLY","VYM"].includes(c)?"米国株・ETF":"監視";
 const initial=codes.map(code=>({code,name:names[code]||code,category:category(code),shares:"",cost:""}));
 let stocks=JSON.parse(localStorage.getItem("orreryStocks")||"null")||initial;
 stocks=stocks.map(s=>({...s,name:(!s.name||s.name===s.code)?(names[s.code]||s.code):s.name}));
+const overseasOrder=["LLY","VYM","VT"];
+stocks.sort((a,b)=>{const ai=overseasOrder.indexOf(a.code),bi=overseasOrder.indexOf(b.code);return (ai<0?999:ai)-(bi<0?999:bi);});
 let alerts=JSON.parse(localStorage.getItem("orreryAlerts")||"[]");
 const $=id=>document.getElementById(id);
 function esc(x){return String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function save(){localStorage.setItem("orreryStocks",JSON.stringify(stocks));render()}
+function save(){stocks.sort((a,b)=>{const ai=overseasOrder.indexOf(a.code),bi=overseasOrder.indexOf(b.code);return (ai<0?999:ai)-(bi<0?999:bi)});localStorage.setItem("orreryStocks",JSON.stringify(stocks));render()}
 function row(s,mode){return `<tr><td class="code">${esc(s.code)}</td><td>${esc(s.name||s.code)}</td><td>${esc(s.category||"監視")}</td>${mode==="main"?'<td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="state">未接続</td>':`<td>${esc(s.shares||"—")}</td><td>${esc(s.cost||"—")}</td><td class="state">未接続</td><td><button class="btn" onclick="removeStock('${esc(s.code)}')">削除</button></td>`}</tr>`}
 function render(){
 $("countLabel").textContent=stocks.length+"銘柄";
 $("mainRows").innerHTML=stocks.map(s=>row(s,"main")).join("");
 $("stockRows").innerHTML=stocks.map(s=>row(s,"watch")).join("");
 const longTerm=[
-{code:"285A",name:"キオクシアHD",price:"7,311円",per:"—",pbr:"3.23倍",yield:"—",roe:"—",grade:"B",latest:"中間期売上収益 4兆2,472億円。前年同期比+436.8%。",memo:"AI・データセンター向け需要が強い一方、メモリー市況の循環性と設備投資負担が大きい。値動き・業績変動に注意。"},
-{code:"2702",name:"日本マクドナルドHD",price:"9,877円",per:"36.17倍",pbr:"3.03倍",yield:"0.64%",roe:"12.09%",grade:"A",latest:"3Q累計 営業利益+11.0%、純利益+12.6%。通期予想を修正、年間配当予想64円。",memo:"ブランド・店舗網・キャッシュ創出力が強み。原材料費、人件費、既存店成長と株価バリュエーションを確認。"},
-{code:"3097",name:"物語コーポレーション",price:"6,040円",per:"26.6倍",pbr:"4.77倍",yield:"0.76%",roe:"18.55%",grade:"A",latest:"2027年6月期1Q 売上+16.8%、営業利益+33.0%、純利益+25.5%。",memo:"売上拡大と利益率改善が同時進行。出店投資・人件費負担、成長期待が株価に織り込まれ過ぎていないかが焦点。",flag:"決算"},
-{code:"4502",name:"武田薬品工業",price:"6,992円",per:"52.94倍",pbr:"1.41倍",yield:"2.94%",roe:"3%",grade:"A",latest:"中間期 売上収益+8.4%、営業利益+60.4%、純利益+171.8%。",memo:"医薬品の分散した収益基盤と配当が魅力。利益には一時要因も含み得るため、主力薬の特許切れ・開発パイプライン・負債を継続確認。"},
-{code:"2594",name:"キーコーヒー",price:"2,090円",per:"59.47倍",pbr:"1.33倍",yield:"0.67%",roe:"3.11%",grade:"B",latest:"中間期 売上+10.0%、営業利益+16.6%、純利益+13.0%。",memo:"ブランドと業務用販路が強み。コーヒー豆価格・為替・原材料高が利益率を圧迫しないかを確認。"},
+{code:"285A",name:"キオクシアHD",price:"7,307円",per:"—",pbr:"3.23倍",yield:"—",roe:"—",grade:"B",latest:"中間期売上収益 4兆2,472億円。前年同期比+436.8%。",memo:"AI・データセンター向け需要が強い一方、メモリー市況の循環性と設備投資負担が大きい。値動き・業績変動に注意。"},
+{code:"2702",name:"日本マクドナルドHD",price:"9,772円",per:"36.17倍",pbr:"3.03倍",yield:"0.64%",roe:"12.09%",grade:"A",latest:"3Q累計 営業利益+11.0%、純利益+12.6%。通期予想を修正、年間配当予想64円。",memo:"ブランド・店舗網・キャッシュ創出力が強み。原材料費、人件費、既存店成長と株価バリュエーションを確認。"},
+{code:"3097",name:"物語コーポレーション",price:"6,130円",per:"26.6倍",pbr:"4.77倍",yield:"0.76%",roe:"18.55%",grade:"A",latest:"2027年6月期1Q 売上+16.8%、営業利益+33.0%、純利益+25.5%。",memo:"売上拡大と利益率改善が同時進行。出店投資・人件費負担、成長期待が株価に織り込まれ過ぎていないかが焦点。",flag:"決算"},
+{code:"4502",name:"武田薬品工業",price:"6,869円",per:"52.94倍",pbr:"1.41倍",yield:"2.94%",roe:"3%",grade:"A",latest:"中間期 売上収益+8.4%、営業利益+60.4%、純利益+171.8%。",memo:"医薬品の分散した収益基盤と配当が魅力。利益には一時要因も含み得るため、主力薬の特許切れ・開発パイプライン・負債を継続確認。"},
+{code:"2594",name:"キーコーヒー",price:"2,078円",per:"59.47倍",pbr:"1.33倍",yield:"0.67%",roe:"3.11%",grade:"B",latest:"中間期 売上+10.0%、営業利益+16.6%、純利益+13.0%。",memo:"ブランドと業務用販路が強み。コーヒー豆価格・為替・原材料高が利益率を圧迫しないかを確認。"},
 {code:"2058",name:"ヒガシマル",price:"1,000円",per:"29.8倍",pbr:"0.86倍",yield:"1.20%",roe:"—",grade:"C",latest:"2026年11月13日に2027年3月期中間決算を公表。数値の詳細照合は未完了。",memo:"食品・水産飼料の事業特性を確認したい小型株。利益の安定性、流動性、配当継続性を原資料で確認するまで評価を抑制。",flag:"決算"},
-{code:"7296",name:"エフ・シー・シー",price:"4,220円",per:"11.2倍",pbr:"0.97倍",yield:"4.50%",roe:"9.64%",grade:"A",latest:"中間期実績を受け通期予想を上方修正。年間配当予想190円。",memo:"二輪クラッチの強みと高い株主還元が魅力。自動車・二輪需要、インド/北米依存、配当性向を確認。"},
+{code:"7296",name:"エフ・シー・シー",price:"4,110円",per:"11.2倍",pbr:"0.97倍",yield:"4.50%",roe:"9.64%",grade:"A",latest:"中間期実績を受け通期予想を上方修正。年間配当予想190円。",memo:"二輪クラッチの強みと高い株主還元が魅力。自動車・二輪需要、インド/北米依存、配当性向を確認。"},
 {code:"2109",name:"DM三井製糖",price:"3,570円",per:"14.4倍",pbr:"0.97倍",yield:"3.92%",roe:"—",grade:"B",latest:"中間期 売上-3.8%、営業利益-1.0%、純利益-10.7%。",memo:"生活必需品に近い需要と配当が下支え。原料糖価格・為替・価格転嫁力、利益の底打ちを確認。"},
 {code:"256A",name:"飛島HD",price:"2,242円",per:"8.9倍",pbr:"0.79倍",yield:"4.91%",roe:"9.26%",grade:"B",latest:"中間期 売上-1.1%、営業利益+12.4%、純利益+3.2%。",memo:"建設・インフラ更新需要が追い風。受注残、採算改善、資材・人件費上昇と財務負担を確認。"},
-{code:"9432",name:"NTT",price:"168.3円",per:"13.84倍",pbr:"1.41倍",yield:"3.20%",roe:"10%",grade:"A",latest:"中間期営業収益7兆3,622億円。通期営業利益予想を1兆7,300億円へ上方修正。",memo:"通信インフラの安定性と配当が長期保有向き。成長率は高くないため、配当成長・設備投資・負債を重視。"},
-{code:"3284",name:"フージャースHD",price:"1,166円",per:"6.71倍",pbr:"0.92倍",yield:"6.35%",roe:"13.44%",grade:"C",latest:"中間期経常利益は3億円の黒字転換。ただし通期計画108億円に対する進捗2.8%。",memo:"上期は改善したが通期達成のハードルが高い。下期の利益計上、在庫・有利子負債、配当原資を確認。",flag:"決算"},
-{code:"8001",name:"伊藤忠商事",price:"2,266円",per:"16.75倍",pbr:"2.43倍",yield:"1.92%",roe:"14%",grade:"A",latest:"中間期収益+9.4%、営業利益+16.7%、純利益+16.0%。",memo:"非資源分野の厚み、分散事業、株主還元が強み。景気循環・投資先評価・株価水準を見ながら長期の中核候補。"},
-{code:"5367",name:"ニッカトー",price:"885円",per:"12.77倍",pbr:"0.81倍",yield:"2.81%",roe:"6%",grade:"A",latest:"中間期売上+25.1%、営業利益+89.3%、純利益+108.7%。",memo:"電子部品・自動車向け需要と稼働率改善で大幅増益。小型株ゆえ業績変動と出来高、増益の持続性を確認。"},
-{code:"290A",name:"Synspective",price:"883円",per:"算出不可（赤字）",pbr:"3.42倍",yield:"—",roe:"—",grade:"C",latest:"3Q累計売上高3,072百万円（+83.7%）、営業損失4,836百万円。受注残高120,565百万円。",memo:"成長市場・受注残は魅力だが赤字と資金調達/希薄化リスクが大きい。安定配当目的の長期枠とは分けて成長投資枠で管理。",flag:"決算"}
+{code:"9432",name:"NTT",price:"167.7円",per:"13.84倍",pbr:"1.41倍",yield:"3.20%",roe:"10%",grade:"A",latest:"中間期営業収益7兆3,622億円。通期営業利益予想を1兆7,300億円へ上方修正。",memo:"通信インフラの安定性と配当が長期保有向き。成長率は高くないため、配当成長・設備投資・負債を重視。"},
+{code:"3284",name:"フージャースHD",price:"1,181円",per:"6.71倍",pbr:"0.92倍",yield:"6.35%",roe:"13.44%",grade:"C",latest:"中間期経常利益は3億円の黒字転換。ただし通期計画108億円に対する進捗2.8%。",memo:"上期は改善したが通期達成のハードルが高い。下期の利益計上、在庫・有利子負債、配当原資を確認。",flag:"決算"},
+{code:"8001",name:"伊藤忠商事",price:"2,412円",per:"16.75倍",pbr:"2.43倍",yield:"1.92%",roe:"14%",grade:"A",latest:"中間期収益+9.4%、営業利益+16.7%、純利益+16.0%。",memo:"非資源分野の厚み、分散事業、株主還元が強み。景気循環・投資先評価・株価水準を見ながら長期の中核候補。"},
+{code:"5367",name:"ニッカトー",price:"961円",per:"12.77倍",pbr:"0.81倍",yield:"2.81%",roe:"6%",grade:"A",latest:"中間期売上+25.1%、営業利益+89.3%、純利益+108.7%。",memo:"電子部品・自動車向け需要と稼働率改善で大幅増益。小型株ゆえ業績変動と出来高、増益の持続性を確認。"},
+{code:"290A",name:"Synspective",price:"1,018円",per:"算出不可（赤字）",pbr:"3.42倍",yield:"—",roe:"—",grade:"C",latest:"3Q累計売上高3,072百万円（+83.7%）、営業損失4,836百万円。受注残高120,565百万円。",memo:"成長市場・受注残は魅力だが赤字と資金調達/希薄化リスクが大きい。安定配当目的の長期枠とは分けて成長投資枠で管理。",flag:"決算"}
 ];
 $("longRows").innerHTML=longTerm.map(s=>`<tr><td class="code">${esc(s.code)}</td><td>${esc(s.name)}${s.flag?` <span class="state">${s.flag}</span>`:""}</td><td class="num">${esc(s.price||"—")}</td><td class="num">${esc(s.per||"—")}</td><td class="num">${esc(s.pbr||"—")}</td><td class="num">${esc(s.yield||"—")}</td><td class="num">${esc(s.roe||"—")}</td><td style="white-space:normal;min-width:230px">${esc(s.latest)}</td><td class="state">${s.grade}</td><td style="white-space:normal;min-width:260px">${esc(s.memo)}</td></tr>`).join("");
+const valuation=[
+["285A","—","—","算定保留","算定保留","市況循環が大きく、単年度EPSでは判断しない"],
+["2702","7,700〜8,300円","7,200〜7,700円","7,700〜8,800円","8,800〜9,600円","現値は成長期待を織込み。追いかけ買いは避ける"],
+["3097","5,500〜5,900円","5,000〜5,500円","5,000〜5,900円","6,000〜6,500円","成長継続を確認。現在値近辺は中立〜やや高め"],
+["4502","5,800〜6,200円","5,200〜5,800円","配当利回り3.3〜3.9%相当","6,800〜7,300円","EPSの一時要因が大きく、配当・負債・パイプライン重視"],
+["2594","1,450〜1,600円","1,300〜1,450円","1,225〜1,575円","1,700〜1,900円","低ROE・低配当。現値では割安感が乏しい"],
+["2058","—","—","算定保留","算定保留","決算資料の数値照合後に設定"],
+["7296","4,000〜4,150円","3,750〜4,000円","3,750〜4,880円","4,700〜5,000円","配当と収益力が支え。現値は適正帯の中ほど"],
+["2109","3,250〜3,400円","3,000〜3,250円","2,970〜3,710円","3,700〜4,000円","業績の底打ち確認を優先。配当利回りも目安"],
+["256A","2,100〜2,200円","2,000〜2,100円","2,000〜2,500円","2,450〜2,650円","配当利回りは魅力。受注採算と財務を確認"],
+["9432","155〜162円","145〜155円","147〜183円","180〜190円","配当重視。急騰時は利回り低下に注意"],
+["3284","1,100〜1,150円","1,050〜1,100円","1,060〜1,410円","1,350〜1,450円","高配当だが利益進捗・財務・配当原資の確認が必要"],
+["8001","2,100〜2,200円","1,950〜2,100円","2,040〜2,310円","2,300〜2,500円","優良商社。現在値では分割買い・押し目待ち"],
+["5367","850〜900円","750〜850円","750〜1,050円","1,050〜1,150円","財務は比較的堅いが増益の持続性を確認"],
+["290A","—","—","算定保留","算定保留","成長投資枠。赤字継続・希薄化・資金繰りを監視"]
+];
+$("valuationRows").innerHTML=valuation.map(v=>`<tr><td class="code">${v[0]}</td><td>${v[1]}</td><td>${v[2]}</td><td>${v[3]}</td><td>${v[4]}</td><td style="white-space:normal;min-width:240px">${v[5]}</td></tr>`).join("");
 $("alertRows").innerHTML=alerts.map((a,i)=>`<div class="tiny" style="padding:8px;border-bottom:1px solid #12365b">${esc(a.code)} / ${a.type==="above"?"以上":"以下"} ${esc(a.price)}円　<button class="btn" onclick="removeAlert(${i})">削除</button> <span class="state">監視未接続</span></div>`).join("")||'<p class="tiny">アラート未登録</p>';
 }
 function removeStock(code){if(confirm(code+"を削除しますか？")){stocks=stocks.filter(s=>s.code!==code);save()}}
